@@ -44,8 +44,9 @@ library_ID  insert_size
 ### S4.phylo_tree.sh
 </br>Single-copy gene families were used to reconstruct the phylogentic tree. 4-fold degenerate sites or amino acid sites were extracted from each single-copy family and concatenated to one super gene for each species. Then, PhyML or Mrbayes is used to construct the phylogenetic tree.
 
+### S4.phylo_tree.pl
 <pre>
-S4.phylo_tree.pl
+
 Name
      phylo_tree.pl - Using TreeBeST or PhyML or MrBayes to 
      reconstruct phylogenetic tree
