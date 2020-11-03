@@ -22,8 +22,8 @@ The lane.list file was formatted like this:
 <pre>
 xx_1.fq 10 10 40
 xx_2.fq 10 10 40
-</pre>
 </br>read_x_file read_front_cutoff_bases_number read_tail_cutoff_bases_number low_quality_bases_cutoff
+</pre>
 
 </br>The lib.lst file was formatted like this:
 <pre>
