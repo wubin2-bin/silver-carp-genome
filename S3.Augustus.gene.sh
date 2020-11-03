@@ -1,0 +1,1 @@
+/augustus-3.2.1/bin/augustus --species=zebrafish --AUGUSTUS_CONFIG_PATH=./config/ --uniqueGeneId=true --noInFrameStop=true --gff3=on --strand=both bighead.genome.rmask.fa > bighead.genome.rmask.fa.augustus
