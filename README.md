@@ -15,7 +15,10 @@ Usage:perl S0.WGS.filter.pl <lane.lst> <lib.lst> [maxjob, default 10]
 
 ### S0.WGS.filter.sh
 </br>Shell script for processing WGS.filter.pl. 
-</br>The lane.list file was formatted like this:
+<pre>
+perl ./S0.WGS.filter.pl lane.list lib.list
+</pre>
+The lane.list file was formatted like this:
 <pre>
 xx_1.fq 10 10 40
 xx_2.fq 10 10 40
@@ -29,19 +32,35 @@ library_ID  insert_size
 </pre>
 
 ### S1.Assembly.Soapdenovo.sh
+<pre>
+perl ./S0.WGS.filter.pl lane.list lib.list
+</pre>
 </br>The script includes four steps and main parameters of Soapdenovo assembly.
 
 
 ### S2.RepeatMasker.find.sh and S2.RepeatProteinMask.find.sh
+<pre>
+./RepeatMasker -nolow -no_is -norna -engine ncbi  -parallel 1 -lib ./RepBase21.01/RepeatMaskerLib.embl.lib bighead.genome.fa
+./RepeatProteinMask -engine ncbi -noLowSimple -pvalue 0.0001 bighead.genome.fa
+</pre>
 </br>We used the known repeat database to find repeats using corresponding software RepeatMasker and RepeatProteinMask, identifying TEs at the DNA and protein level, respectively.
 
 ### S3.Augustus.gene.sh
+<pre>
+/augustus-3.2.1/bin/augustus --species=zebrafish --AUGUSTUS_CONFIG_PATH=./config/ --uniqueGeneId=true --noInFrameStop=true --gff3=on --strand=both bighead.genome.rmask.fa > bighead.genome.rmask.fa.augustus
+</pre>
 </br>With the help of HMM model, de novo prediction was performed based on the repeat-masked genome. Programs we applied were AUGUSTUS.
 
 ### S3.Genewise.homo.gene.sh
+<pre>
+./genewise/wise2.4.1/src/bin/genewise -trev -sum  -genesf  -gff ref.gene.gff bighead.genome.fa >  bighead.genome.fa.genewise
+</pre>
 </br>Homologous proteins of other species (e.g. from Ensembl) were mapped to the genome using TblastN with an E-value cutoff 1e-5, the aligned sequences as well as their corresponding query proteins were then filtered and passed to GeneWise for searching accurate spliced alignments.
 
 ### S4.phylo_tree.sh
+<pre>
+./S4.phylo_tree.pl single-copy.pep.phy --type ml -d aa -outdir result/
+</pre>
 </br>Single-copy gene families were used to reconstruct the phylogentic tree. 4-fold degenerate sites or amino acid sites were extracted from each single-copy family and concatenated to one super gene for each species. Then, PhyML or Mrbayes is used to construct the phylogenetic tree.
 
 ### S4.phylo_tree.pl
